@@ -3,7 +3,7 @@ import pickle
 import streamlit as st
 
 # Loading the saved model
-loaded_model = pickle.load(open(r"C:\Users\shubh\Desktop\Final\project 3\Customer_churn_prediction.sav", 'rb'))
+loaded_model = pickle.load(open("Customer_churn_prediction.sav", 'rb'))
 
 # Creating a function for prediction
 def Customer_churn_prediction(input_data):
