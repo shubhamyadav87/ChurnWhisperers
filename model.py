@@ -33,11 +33,11 @@ def main():
     Balance=st.text_input("Enter your Balance")
     NumOfProducts=st.text_input("Enter Num Of Products you owned")
     HasCrCard=st.text_input("Do you have Credit card")
-    IsActiveMember=st.text_input("you are a active member")
+    IsActiveMember=st.text_input("you are a active member(1,0)")
     EstimatedSalary=st.text_input("Enter Estimated Salary")
-    Geography_Germany=st.text_input("you live in Germany")
-    Geography_Spain=st.text_input("you live in spain")
-    Gender_Male=st.text_input("You are a male")
+    Geography_Germany=st.text_input("you live in Germany(True/False)")
+    Geography_Spain=st.text_input("you live in spain(True/False)")
+    Gender_Male=st.text_input("You are a male(True/False)")
     
     #code_for_prediction
     predict=""
