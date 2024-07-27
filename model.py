@@ -2,55 +2,57 @@ import numpy as np
 import pickle
 import streamlit as st
 
-#loading_save_model
-loaded_model=pickle.load(open("Customer_churn_prediction.sav",'rb'))
+# Loading the saved model
+loaded_model = pickle.load(open(r"C:\Users\shubh\Desktop\Final\project 3\Customer_churn_prediction.sav", 'rb'))
 
-#creating_a_function
+# Creating a function for prediction
 def Customer_churn_prediction(input_data):
-  #changing input_data into array
-  input_data_as_array=np.asarray(input_data)
-  #reshaping the array
-  input_data_reshaped=input_data_as_array.reshape(1,-1)
-  #prediction
-  prediction=loaded_model.predict(input_data_reshaped)
-  print(prediction)
-  #condition
-  if(prediction[0]==0):
-    print("The person will not exit")
-  else:
-    print("The person will exit")
-    
+    # Changing input_data into array
+    input_data_as_array = np.asarray(input_data, dtype=np.float64)
+    # Reshaping the array
+    input_data_reshaped = input_data_as_array.reshape(1, -1)
+    # Prediction
+    prediction = loaded_model.predict(input_data_reshaped)
+    # Condition
+    if prediction[0] == 0:
+        return "The person will not exit"
+    else:
+        return "The person will exit"
 
 def main():
-    
-    #title
+    # Title
     st.title("ChurnWhisperers")
     
-    #input_data    
-    CreditScore=st.text_input("Enter CreditScore")
-    Age=st.text_input("Enter Your Age")
-    Tenure=st.text_input("Enter your Tenure")
-    Balance=st.text_input("Enter your Balance")
-    NumOfProducts=st.text_input("Enter Num Of Products you owned")
-    HasCrCard=st.text_input("Do you have Credit card")
-    IsActiveMember=st.text_input("you are a active member(1,0)")
-    EstimatedSalary=st.text_input("Enter Estimated Salary")
-    Geography_Germany=st.text_input("you live in Germany(True/False)")
-    Geography_Spain=st.text_input("you live in spain(True/False)")
-    Gender_Male=st.text_input("You are a male(True/False)")
+    # Input data
+    CreditScore = st.text_input("Enter CreditScore")
+    Age = st.text_input("Enter Your Age")
+    Tenure = st.text_input("Enter your Tenure")
+    Balance = st.text_input("Enter your Balance")
+    NumOfProducts = st.text_input("Enter Num Of Products you own")
+    HasCrCard = st.text_input("Do you have a Credit card (0 for No, 1 for Yes)")
+    IsActiveMember = st.text_input("Are you an active member (0 for No, 1 for Yes)")
+    EstimatedSalary = st.text_input("Enter Estimated Salary")
+    Geography_Germany = st.text_input("Do you live in Germany (0 for No, 1 for Yes)")
+    Geography_Spain = st.text_input("Do you live in Spain (0 for No, 1 for Yes)")
+    Gender_Male = st.text_input("Are you male (0 for No, 1 for Yes)")
     
-    #code_for_prediction
-    predict=""
+    # Code for prediction
+    predict = ""
     
-    #create_button for results
-    
-    if st.button("Results:"):
-        predict=Customer_churn_prediction([CreditScore,Age,Tenure,Balance,NumOfProducts,HasCrCard,IsActiveMember,EstimatedSalary,Geography_Germany,Geography_Spain,Gender_Male])
+    # Create button for results
+    if st.button("Results"):
+        input_data = [
+            CreditScore, Age, Tenure, Balance, NumOfProducts, HasCrCard, 
+            IsActiveMember, EstimatedSalary, Geography_Germany, Geography_Spain, Gender_Male
+        ]
+        
+        # Convert inputs to appropriate data types
+        input_data = list(map(float, input_data))
+        
+        # Get prediction
+        predict = Customer_churn_prediction(input_data)
     
     st.success(predict)
-    
-    
-if __name__=='__main__':
-    main() 
-    
-    
+
+if __name__ == '__main__':
+    main()
